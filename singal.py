@@ -1,6 +1,6 @@
 import math
 import numpy as np
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 print("\nWelcome to the Singal Inrterfercen visualizer!!!")
 print("Please enter the following information about your waves to have them visualized.")
@@ -108,5 +108,21 @@ wave_number = (2*math.pi)/int(wave_length)
 wave_number2 = (2*math.pi)/int(wave_length2)
 
 
+# Time domain plot
+t = np.linspace(0, 1 / frequency, 1000)  # Time values
+wave1_time = amplitude * np.sin(angular_frequency * t - wave_number * x1 + phase)
+wave2_time = amplitude2 * np.sin(angular_frequency2 * t - wave_number2 * x2 + phase2)
 
+plt.figure(figsize=(12, 6))
+plt.subplot(2, 1, 1)
+plt.plot(t, wave1_time, label="Wave 1")
+plt.plot(t, wave2_time, label="Wave 2")
+plt.xlabel("Time (s)")
+plt.ylabel("Amplitude (V)")
+plt.title("Time Domain Plot")
+plt.legend()
+plt.grid(True)
+
+plt.tight_layout()
+plt.show()
 
