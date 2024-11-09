@@ -109,20 +109,62 @@ wave_number2 = (2*math.pi)/int(wave_length2)
 
 
 # Time domain plot
-t = np.linspace(0, 1 / frequency, 1000)  # Time values
+t = np.linspace(0, 1 / frequency, 1000)  
 wave1_time = amplitude * np.sin(angular_frequency * t - wave_number * x1 + phase)
 wave2_time = amplitude2 * np.sin(angular_frequency2 * t - wave_number2 * x2 + phase2)
 
-plt.figure(figsize=(12, 6))
-plt.subplot(2, 1, 1)
+summed_wave_time = wave1_time + wave2_time
+
+plt.figure(figsize=(12, 12))#Size of the window
+
+# Ploting Wave 1 and Wave 2 in Time Domain
+plt.subplot(4, 1, 1)
 plt.plot(t, wave1_time, label="Wave 1")
 plt.plot(t, wave2_time, label="Wave 2")
 plt.xlabel("Time (s)")
 plt.ylabel("Amplitude (V)")
-plt.title("Time Domain Plot")
+plt.title("Time Domain Plot - Wave 1 and Wave 2")
 plt.legend()
 plt.grid(True)
 
+# Ploting Summed Wave in Time Domain
+plt.subplot(4, 1, 2)
+plt.plot(t, summed_wave_time, label="Summed Wave (Time Domain)", color="purple")
+plt.xlabel("Time (s)")
+plt.ylabel("Amplitude (V)")
+plt.title("Time Domain Plot - Summed Wave")
+plt.legend()
+plt.grid(True)
+
+
+
+#Space domain plot
+x = np.linspace(0, 2 * max(wave_length, wave_length2), 1000)  # Space values
+wave1_space = amplitude * np.sin(wave_number * x - angular_frequency * t1 + phase)
+wave2_space = amplitude2 * np.sin(wave_number2 * x - angular_frequency2 * t2 + phase2)
+
+summed_wave_space = wave1_space + wave2_space
+
+# Ploting Wave 1 and Wave 2 in Space Domain
+plt.subplot(4, 1, 3)
+plt.plot(x, wave1_space, label="Wave 1")
+plt.plot(x, wave2_space, label="Wave 2")
+plt.xlabel("Position (m)")
+plt.ylabel("Amplitude (V)")
+plt.title("Space Domain Plot - Wave 1 and Wave 2")
+plt.legend()
+plt.grid(True)
+
+# Ploting Summed Wave in Space Domain
+plt.subplot(4, 1, 4)
+plt.plot(x, summed_wave_space, label="Summed Wave (Space Domain)", color="purple")
+plt.xlabel("Position (m)")
+plt.ylabel("Amplitude (V)")
+plt.title("Space Domain Plot - Summed Wave")
+plt.legend()
+plt.grid(True)
+
+#Showing the plots
 plt.tight_layout()
 plt.show()
 
